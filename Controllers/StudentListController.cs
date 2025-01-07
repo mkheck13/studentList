@@ -1,4 +1,5 @@
-using Microsoft.AspNetCore.Mvc; // This allows us to add our apiContoller
+using Microsoft.AspNetCore.Mvc;
+using studentList.Services; // This allows us to add our apiContoller
 
 namespace studentList.Controllers
 {
@@ -6,14 +7,14 @@ namespace studentList.Controllers
     [Route("[controller]")] // removing the api/ we no longer need to type it in our url.
     public class StudentListController : ControllerBase
     {
-        public List<string> studentList = new();
+        // we are creating an empty reference to our services
+        private readonly StudentListServices _studentListServices;
 
         //The Constructer runs first when the api is called
-        // Web API version of void start
-        public StudentListController()
+        // Web API version of void start from unity
+        public StudentListController(StudentListServices studentListServices)
         {
-            studentList.Add("Jacob");
-            studentList.Add("Mr. Hackerman");
+            _studentListServices = studentListServices;
         }
 
 
@@ -21,7 +22,7 @@ namespace studentList.Controllers
         [Route("FetchStudentList")]
         public List<string> GetStudents()
         {
-            return studentList;
+            return _studentListServices.GetStudents();
         }
 
 
@@ -29,8 +30,7 @@ namespace studentList.Controllers
         [Route("AddStudent/{studentTooAdd}")] //To pass data though our routes we add /{parameter}
         public List<string> AddToStudentList(string studentTooAdd)
         {
-            studentList.Add(studentTooAdd);
-            return studentList;
+            return _studentListServices.AddStudentList(studentTooAdd);
         }
 
 
@@ -38,8 +38,7 @@ namespace studentList.Controllers
         [Route("RemoveStudent/{studentToRemove}")]
         public List<string> RemoveStudentFromList(string studentToRemove)
         {
-            studentList.Remove(studentToRemove);
-            return studentList;
+            return _studentListServices.RemoveFromStudentList(studentToRemove);
         }
         
 
@@ -48,8 +47,7 @@ namespace studentList.Controllers
         public List<string> EditStudentFromList(string studentToEdit, string newStudentName)
         {
             // We are going to find the Index at which studentToEdit exists and then change the value of that index
-            studentList[studentList.IndexOf(studentToEdit)] = newStudentName;
-            return studentList;
+            return _studentListServices.EditStudentFromList(studentToEdit, newStudentName);
         }
     }
 }

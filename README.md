@@ -7,4 +7,17 @@ We are going to create a Controller with the following routes
 4. Editting a student in our list. [HttpPut]
 
 We gave our Endpoints (Routes) specific paths using /{parameter} for user interaction
-Did Psudo CRUD Function which is Create(POST), Read(GET), Update(EDIT), Delete(REMOVE)
+Did Psudo CRUD Function which is Create(POST), Read(GET), Update(EDIT), Delete(DELETE)
+
+dotnet new gitignore
+
+### Day 2 We will cover Services and Dependancy interactions
+
+
+We are going to create a services file that houses our logic and then we will inject that class into our controller
+
+1. We created a services folder and file
+2. transfered function / logic over to our services (typically we would do our services first)
+3. We had to add our services into our program.cs in order to provide our services thought our API
+4. We injected the data into our controller via "Dependancy injection"
+5. We were able to Use and Access our methods from our object (_studentListServices).
