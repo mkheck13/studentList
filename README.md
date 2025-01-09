@@ -21,3 +21,12 @@ We are going to create a services file that houses our logic and then we will in
 3. We had to add our services into our program.cs in order to provide our services thought our API
 4. We injected the data into our controller via "Dependancy injection"
 5. We were able to Use and Access our methods from our object (_studentListServices).
+
+### Day 3 today we are covering Models and Built in C# Methods (FInd & FindIndex)
+
+-What is a Model
+
+A Model is a Repersentation of Data that we will use throughout our app aka a blueprint for objects
+
+Eventually when we get into databases our models will repersent the data we will be sending and retreiving from our DB.
+
