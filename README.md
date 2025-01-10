@@ -30,3 +30,16 @@ A Model is a Repersentation of Data that we will use throughout our app aka a bl
 
 Eventually when we get into databases our models will repersent the data we will be sending and retreiving from our DB.
 
+### Day 4 We will be creating a database with azure & connecting to it via EFCore
+
+What is EF Core?
+
+Entity Framework Core It allows our application to interact with our Database without using and Sql commands
+
+1. Set up our database using azure
+2. Configureing our database connection in our appsetting.json
+3. installing EFCore Packages & SQL Server Packages
+4. We will be making a class called DataContext will be acting as a bridge from our c# code to our database tables
+5. Register our database within our app (program.cs)
+6. we will be chaging our logic for our services to account for our database.
+
