@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using studentList.Context;
 using studentList.Models;
 
 namespace studentList.Services
@@ -9,18 +10,16 @@ namespace studentList.Services
     public class StudentListServices
     {
         public List<StudentModel> studentList = new();
+        private readonly DataContext _dataBase;
 
-        public StudentListServices()
+        public StudentListServices(DataContext dataContext)
         {
-            studentList.Add(new StudentModel {
-                Id = 0,
-                Name = "Charles"
-            });
+            _dataBase = dataContext;
         }
 
         public List<StudentModel> GetStudents()
         {
-            return studentList;
+            return _dataBase.Students.ToList();
         }
 
         public List<StudentModel> AddStudentList(string studentTooAdd)
@@ -28,22 +27,28 @@ namespace studentList.Services
             StudentModel student = new();
             student.Name = studentTooAdd;
 
-            studentList.Add(student);
-            return studentList;
+            _dataBase.Students.Add(student);
+            _dataBase.SaveChanges();
+            return _dataBase.Students.ToList();
         }
 
         public List<StudentModel> RemoveFromStudentList(string studentToRemove)
         {
-            StudentModel student = studentList.Find(student => student.Name == studentToRemove);
-            studentList.Remove(student);
-            return studentList;
+            var student = _dataBase.Students.FirstOrDefault(student => student.Name == studentToRemove);
+            _dataBase.Students.Remove(student);
+            _dataBase.SaveChanges();
+            return _dataBase.Students.ToList();
         }
 
         public List<StudentModel> EditStudentFromList(string studentToEdit, string newStudentName)
         {
-            int index = studentList.FindIndex(student => student.Name == studentToEdit);
-            studentList[index].Name = newStudentName;
-            return studentList;
+            var student = _dataBase.Students.FirstOrDefault(student => student.Name == studentToEdit);
+
+            student.Name = newStudentName;
+
+            _dataBase.Students.Update(student);
+            _dataBase.SaveChanges();
+            return _dataBase.Students.ToList();
         }
     }
 }

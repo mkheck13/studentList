@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using studentList.Models;
 
-namespace studentList.DataContext
+namespace studentList.Context
 {
     //This class will act as a bridge from our C# app to our DataBase
     public class DataContext : DbContext
@@ -12,6 +12,6 @@ namespace studentList.DataContext
 
         }
         //We are setting a table in our database named students and it is of our StudentModel Type
-        DbSet<StudentModel> Students { get; set; }
+        public DbSet<StudentModel> Students { get; set; }
     }
 }
